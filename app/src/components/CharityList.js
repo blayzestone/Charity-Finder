@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { fetchCharities } from '../store/actions';
 
+import CharityCard from './CharityCard';
+
 const CharityList = props => {
   useEffect(() => {
     props.fetchCharities();
@@ -13,9 +15,7 @@ const CharityList = props => {
       {props.isFetching && <div>Fetching charities...</div>}
       {
         props.charities.map(charity => (
-          <div key={charity.ein}>
-            {charity.charityName}
-          </div>
+          <CharityCard key={charity.ein} charity={charity} />
         ))
       }
     </div>

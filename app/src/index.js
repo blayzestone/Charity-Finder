@@ -5,6 +5,9 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
+import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import reducer from './store/reducers';
 
 import App from './App';
