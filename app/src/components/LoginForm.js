@@ -12,7 +12,10 @@ const LoginForm = props => {
     password: "",
   });
 
-  const handleSubmit = () => props.userLogin(credentials);
+  const handleSubmit = e => {
+    e.preventDefault();
+    props.userLogin(credentials);
+  }
 
   return (
     <Form onSubmit={handleSubmit} className="bg-light px-4 py-5 rounded">
