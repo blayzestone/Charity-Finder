@@ -5,6 +5,7 @@ import {
   Route, 
 } from 'react-router-dom';
 
+import Header from './components/Header';
 import CharityList from './components/CharityList';
 
 function App() {
@@ -13,10 +14,16 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/home">
+              <Header />
               <CharityList />
           </Route>
           <Route path="/profile">
+              <Header />
               Profile
+          </Route>
+          <Route path="/search">
+              <Header />
+              Search
           </Route>
           <Route path="/register">
               Register
