@@ -7,29 +7,26 @@ import {
 
 import Header from './components/Header';
 import CharityList from './components/CharityList';
+import HomeScreen from './components/HomeScreen';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/home">
-              <Header />
-              <CharityList />
-          </Route>
           <Route path="/profile">
               <Header />
               Profile
           </Route>
-          <Route path="/search">
-              <Header />
-              Search
-          </Route>
           <Route path="/register">
               Register
           </Route>
+          <Route path="/results">
+              <Header />
+              <CharityList />
+          </Route>
           <Route path="/">
-              Login
+            <HomeScreen />
           </Route>
         </Switch>
       </div>
