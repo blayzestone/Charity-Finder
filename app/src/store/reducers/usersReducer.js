@@ -3,11 +3,13 @@ import { USER_LOGIN } from '../actions';
 const initialState = {
   user: {
     isLoggedIn: false,
+    id: null,
     username: "",
     password: "",
   },
   users: [
     {
+      id: 1,
       username: "admin",
       password: "admin",
     }
@@ -17,16 +19,19 @@ const initialState = {
 export const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER_LOGIN:
-      const username = state.users.find(user => action.payload.username === user.username);
-      const password = state.users.find(user => action.payload.password === user.password);
+      const userIndex = state.users.findIndex(user => {
+        return action.payload.username === user.username;
+      });
+      const user = state.users[userIndex]
 
-      if (username && password) {
+      if (user && action.payload.password === user.password) {
         return {
           ...state,
           user: {
             isLoggedIn: true,
-            username,
-            password,
+            id: user.id,
+            username: user.username,
+            password: user.password,
           }
         }
       }
