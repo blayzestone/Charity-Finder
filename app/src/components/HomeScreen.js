@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import LoginForm from './LoginForm';
 
-const HomeScreen = props => {
+const HomeScreen = ({ isLoggedIn }) => {
+  const history = useHistory();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.push('/results');
+    }
+  }, [isLoggedIn]);
+
   return(
     <div 
       style={{ height: '100vh' }} 
       className="w-100 bg-primary d-flex justify-content-center align-items-center">
     {
-      props.isLoggedIn 
-        ? <div>Logged In</div> 
-        : <LoginForm />
+      !isLoggedIn && <LoginForm />
     }
     </div>
   );
