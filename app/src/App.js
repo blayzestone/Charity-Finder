@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { 
   BrowserRouter as Router, 
   Switch, 
@@ -9,21 +10,21 @@ import Header from './components/Header';
 import CharityList from './components/CharityList';
 import HomeScreen from './components/HomeScreen';
 
-function App() {
+function App({charities, userCharities}) {
   return (
     <Router>
       <div className="App">
         <Switch>
           <Route path="/profile">
               <Header />
-              Profile
+              <CharityList charities={userCharities} />
           </Route>
           <Route path="/register">
               Register
           </Route>
           <Route path="/results">
               <Header />
-              <CharityList />
+              <CharityList charities={charities} />
           </Route>
           <Route path="/">
             <HomeScreen />
@@ -34,4 +35,11 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    charities: state.charity.charities,
+    userCharities: state.users.user.charities,
+  }
+}
+
+export default connect(mapStateToProps, {})(App);
