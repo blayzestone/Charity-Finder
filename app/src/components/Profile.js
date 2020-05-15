@@ -8,7 +8,7 @@ const Profile = props => {
   return (
     <>
       <Header />
-      <CharityList charities={props.userCharityList} />
+      <CharityList charities={props.userCharityList} renderSaveButton={false} />
     </>
   )
 }

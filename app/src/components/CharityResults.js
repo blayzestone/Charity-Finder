@@ -15,7 +15,7 @@ const CharityResults = ({ isFetching, fetchCharities, charities, }) => {
       <Header />
       {isFetching && <div>Fetching charities...</div>}
       {
-        <CharityList charities={charities} />
+        <CharityList charities={charities} renderSaveButton={true} />
       }
     </main>
   );

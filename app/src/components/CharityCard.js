@@ -11,7 +11,7 @@ import {
 
 import { saveCharity } from '../store/actions';
 
-const CharityCard = ({ charity, saveCharity }) => {
+const CharityCard = ({ charity, saveCharity, renderSaveButton }) => {
   return(
       <Card body className="text-center mx-auto my-5 w-75">
         <CardBody className="p-5">
@@ -23,13 +23,16 @@ const CharityCard = ({ charity, saveCharity }) => {
               ? <CardLink href={charity.donationUrl} target="_blank">Donate</CardLink> 
               : null
           }
-          <Button 
+          {
+            renderSaveButton 
+            && <Button 
             onClick={() => saveCharity(charity)} 
             color="danger" 
             className="d-block m-auto"
           >
             Save to profile
           </Button>
+          }
         </CardBody>
       </Card>
   );
