@@ -30,6 +30,7 @@ export const usersReducer = (state = initialState, action) => {
         return {
           ...state,
           user: {
+            ...state.user,
             isLoggedIn: true,
             id: user.id,
             username: user.username,
