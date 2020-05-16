@@ -9,9 +9,9 @@ const HomeScreen = ({ isLoggedIn }) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      history.push('/results');
+      history.push('/search');
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, history]);
 
   return(
     <div 
