@@ -6,14 +6,14 @@ const initialState = {
     id: null,
     username: "",
     password: "",
-    charities: [],
+    charities: {},
   },
   users: [
     {
       id: 1,
       username: "admin",
       password: "admin",
-      charities: [],
+      charities: {},
     }
   ],
 }
@@ -40,10 +40,10 @@ export const usersReducer = (state = initialState, action) => {
       }
       return state;
     case SAVE_CHARITY:
-      const updatedCharities = [
+      const updatedCharities = {
         ...state.user.charities,
-        action.payload,
-      ];
+        [action.payload.ein]: action.payload,
+      };
       const updatedUsers = state.users.map(user => {
         if(user.id === state.user.id) {
           return {

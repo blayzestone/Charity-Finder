@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   isFetching: false,
-  charities: [],
+  charities: {},
   errorMessage: "",
 }
 
@@ -18,10 +18,14 @@ export const charityReducer = (state = initialState, action) => {
         isFetching: true,
       }
     case FETCH_CHARITIES_SUCCESS:
+      const charities = action.payload.reduce((obj, charity) => {
+        obj[charity.ein] = charity;
+        return obj;
+      });
       return {
         ...state,
         isFetching: false,
-        charities: action.payload,
+        charities: charities,
       }
     case FETCH_CHARITIES_FAILURE:
       return {
