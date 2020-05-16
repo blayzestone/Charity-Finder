@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { 
+  Button,
   CardLink,
   Card,
   CardBody,
@@ -7,7 +9,9 @@ import {
   CardText,
 } from 'reactstrap';
 
-const CharityCard = ({ charity }) => {
+import { saveCharity } from '../store/actions';
+
+const CharityCard = ({ charity, saveCharity, renderSaveButton }) => {
   return(
       <Card body className="text-center mx-auto my-5 w-75">
         <CardBody className="p-5">
@@ -19,9 +23,19 @@ const CharityCard = ({ charity }) => {
               ? <CardLink href={charity.donationUrl} target="_blank">Donate</CardLink> 
               : null
           }
+          {
+            renderSaveButton 
+            && <Button 
+            onClick={() => saveCharity(charity)} 
+            color="danger" 
+            className="d-block m-auto"
+          >
+            Save to profile
+          </Button>
+          }
         </CardBody>
       </Card>
   );
 }
 
-export default CharityCard;
+export default connect(null, { saveCharity })(CharityCard);

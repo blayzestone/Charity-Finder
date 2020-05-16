@@ -1,32 +1,17 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-
-import { fetchCharities } from '../store/actions';
+import React from 'react';
 
 import CharityCard from './CharityCard';
 
-const CharityList = props => {
-  useEffect(() => {
-    props.fetchCharities();
-  }, []);
-
+const CharityList = ({ charities, renderSaveButton }) => {
   return (
-    <div>
-      {props.isFetching && <div>Fetching charities...</div>}
+    <>
       {
-        props.charities.map(charity => (
-          <CharityCard key={charity.ein} charity={charity} />
+        charities.map(charity => (
+          <CharityCard key={charity.ein} charity={charity} renderSaveButton={renderSaveButton} />
         ))
       }
-    </div>
+    </>
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    isFetching: state.charity.isFetching,
-    charities: state.charity.charities,
-  }
-}
-
-export default connect(mapStateToProps, { fetchCharities })(CharityList);
+export default CharityList;

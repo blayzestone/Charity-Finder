@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { baseUrl, apiKey } from '../../constants';
 
+export const USER_LOGIN = "USER_LOGIN";
+export const SAVE_CHARITY = "SAVE_CHARITY";
 export const FETCH_CHARITIES_START = "FETCH_CHARITIES_START";
 export const FETCH_CHARITIES_SUCCESS = "FETCH_CHARITIES_SUCCESS";
 export const FETCH_CHARITIES_FAILURE = "FETCH_CHARITIES_FAILURE";
 
-export const USER_LOGIN = "USER_LOGIN";
 
 export const fetchCharities = () => dispatch => {
   dispatch({ type: FETCH_CHARITIES_START });
@@ -21,4 +22,8 @@ export const fetchCharities = () => dispatch => {
 
 export const userLogin = (credentials = {}) => {
   return { type: USER_LOGIN, payload: credentials }
+}
+
+export const saveCharity = charity => {
+  return { type: SAVE_CHARITY, payload: charity }
 }

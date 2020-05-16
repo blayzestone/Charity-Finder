@@ -1,4 +1,4 @@
-import { USER_LOGIN } from '../actions';
+import { USER_LOGIN, SAVE_CHARITY, } from '../actions';
 
 const initialState = {
   user: {
@@ -6,12 +6,14 @@ const initialState = {
     id: null,
     username: "",
     password: "",
+    charities: [],
   },
   users: [
     {
       id: 1,
       username: "admin",
       password: "admin",
+      charities: [],
     }
   ],
 }
@@ -28,6 +30,7 @@ export const usersReducer = (state = initialState, action) => {
         return {
           ...state,
           user: {
+            ...state.user,
             isLoggedIn: true,
             id: user.id,
             username: user.username,
@@ -36,6 +39,29 @@ export const usersReducer = (state = initialState, action) => {
         }
       }
       return state;
+    case SAVE_CHARITY:
+      const updatedCharities = [
+        ...state.user.charities,
+        action.payload,
+      ];
+      const updatedUsers = state.users.map(user => {
+        if(user.id === state.user.id) {
+          return {
+            ...user,
+            charities: updatedCharities,
+          }
+        }
+        return user;
+      });
+
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          charities: updatedCharities,
+        },
+        users: updatedUsers,
+      }
     default:
       return state;
   }
