@@ -5,9 +5,8 @@ import {
   Route, 
 } from 'react-router-dom';
 
-import Header from './components/Header';
-import CharityList from './components/CharityList';
 import HomeScreen from './components/HomeScreen';
+import Search from './components/Search';
 import CharityResults from './components/CharityResults';
 import Profile from './components/Profile';
 
@@ -24,6 +23,9 @@ function App() {
           </Route>
           <Route path="/results">
               <CharityResults />
+          </Route>
+          <Route path="/search">
+              <Search />
           </Route>
           <Route path="/">
             <HomeScreen />

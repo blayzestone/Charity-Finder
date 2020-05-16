@@ -8,10 +8,11 @@ export const FETCH_CHARITIES_SUCCESS = "FETCH_CHARITIES_SUCCESS";
 export const FETCH_CHARITIES_FAILURE = "FETCH_CHARITIES_FAILURE";
 
 
-export const fetchCharities = () => dispatch => {
+export const fetchCharities = (searchTerm = "", city = "", state = "", zipCode = "") => dispatch => {
   dispatch({ type: FETCH_CHARITIES_START });
+  const params = `&searchTerm=${searchTerm}&city=${city}&state=${state}&zipCode=${zipCode}`;
 
-  axios.get(`${baseUrl}?user_key=${apiKey}`)
+  axios.get(`${baseUrl}?user_key=${apiKey}${params}`)
     .then(res => {
       dispatch({ type: FETCH_CHARITIES_SUCCESS, payload: res.data.data });
     })

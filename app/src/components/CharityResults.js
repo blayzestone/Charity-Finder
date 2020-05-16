@@ -5,10 +5,7 @@ import { fetchCharities } from '../store/actions';
 import Header from './Header';
 import CharityList from './CharityList';
 
-const CharityResults = ({ isFetching, fetchCharities, charities, }) => {
-  useEffect(() => {
-    fetchCharities();
-  }, [fetchCharities]);
+const CharityResults = ({ isFetching, charities, }) => {
 
   return (
     <main>
