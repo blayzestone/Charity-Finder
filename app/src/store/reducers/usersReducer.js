@@ -1,4 +1,4 @@
-import { USER_LOGIN, SAVE_CHARITY, } from '../actions';
+import { USER_LOGIN, SAVE_CHARITY } from "../actions";
 
 const initialState = {
   user: {
@@ -8,35 +8,33 @@ const initialState = {
     password: "",
     charities: {},
   },
-  users: [
-    {
+  users: {
+    1: {
       id: 1,
       username: "admin",
       password: "admin",
       charities: {},
-    }
-  ],
-}
+    },
+  },
+};
 
 export const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER_LOGIN:
-      const userIndex = state.users.findIndex(user => {
+      const user = Object.values(state.users).find((user) => {
         return action.payload.username === user.username;
       });
-      const user = state.users[userIndex]
 
       if (user && action.payload.password === user.password) {
         return {
           ...state,
           user: {
-            ...state.user,
             isLoggedIn: true,
             id: user.id,
             username: user.username,
             password: user.password,
-          }
-        }
+          },
+        };
       }
       return state;
     case SAVE_CHARITY:
@@ -44,15 +42,6 @@ export const usersReducer = (state = initialState, action) => {
         ...state.user.charities,
         [action.payload.ein]: action.payload,
       };
-      const updatedUsers = state.users.map(user => {
-        if(user.id === state.user.id) {
-          return {
-            ...user,
-            charities: updatedCharities,
-          }
-        }
-        return user;
-      });
 
       return {
         ...state,
@@ -60,9 +49,12 @@ export const usersReducer = (state = initialState, action) => {
           ...state.user,
           charities: updatedCharities,
         },
-        users: updatedUsers,
-      }
+        users: {
+          ...state.users,
+          [state.user.id]: updatedCharities,
+        },
+      };
     default:
       return state;
   }
-}
+};
