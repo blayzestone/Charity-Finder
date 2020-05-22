@@ -6,7 +6,7 @@ const CharityList = ({ charities, renderSaveButton }) => {
   return (
     <>
       {
-        charities.map(charity => (
+        Object.values(charities).map(charity => (
           <CharityCard key={charity.ein} charity={charity} renderSaveButton={renderSaveButton} />
         ))
       }
